@@ -87,7 +87,6 @@ function processLastItem(strList , cb) {
  * [2] Invoking `processSum` passing `[]` and `(num) => num + 1000`,
  * should return 1000.
 */
-// @ts-ignore
 function processSum(num,cb) { 
   const reducer = (acc, cur) => acc + cur;
   
@@ -159,6 +158,10 @@ function processContains(item, list, cb) {
  * should return 3.
 */
 function processDuplicateFree(list, cb) {
+  function duplicateFree ( value, index, self){
+    return self.indexOf(value)=== index;
+  }
+  return cb(list.filter(duplicateFree))
   
 }
 
@@ -288,9 +291,21 @@ function counterMaker() {
  * etc
 */
 function counterMakerWithLimit(max) {
+  let count = -1;
+  function counter() {
+    if(count < max){
+      count++;
+    } else if (count === max){
+      count = 0;
+    }
+  return count
+  }
+  return counter
+  };
   
+
   /* CODE HERE */
-}
+
 
 /////////////// END OF CHALLENGE ///////////////
 /////////////// END OF CHALLENGE ///////////////
